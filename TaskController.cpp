@@ -66,7 +66,16 @@ void TaskController::editTask() {
 
 void TaskController::deleteTask() {
     size_t index = view.getIntegerInput("Enter task index to delete: ") - 1;
-    model.deleteTask(index);
+
+    // ƒобавл€ем подтверждение перед удалением
+    std::string confirmation = view.getInput("Are you sure you want to delete this task? (yes/no): ");
+    if (confirmation == "yes") {
+        model.deleteTask(index);
+        std::cout << "Task deleted successfully.\n";
+    }
+    else {
+        std::cout << "Task deletion cancelled.\n";
+    }
 }
 
 void TaskController::markTaskAsDone() {
